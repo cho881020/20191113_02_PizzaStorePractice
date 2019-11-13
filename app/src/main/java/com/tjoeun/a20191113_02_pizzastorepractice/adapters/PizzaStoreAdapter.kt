@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.tjoeun.a20191113_02_pizzastorepractice.R
 import com.tjoeun.a20191113_02_pizzastorepractice.datas.PizzaStoreData
+import de.hdodenhof.circleimageview.CircleImageView
 
 class PizzaStoreAdapter(context:Context, resource:Int, list:ArrayList<PizzaStoreData>)
     : ArrayAdapter<PizzaStoreData> (context, R.layout.pizza_store_list_item, list) {
@@ -32,6 +35,11 @@ class PizzaStoreAdapter(context:Context, resource:Int, list:ArrayList<PizzaStore
 //        근거 데이터 변수 추출
         var data = mList.get(position)
 
+        var storeLogoImg = row.findViewById<CircleImageView>(R.id.storeLogoImg)
+        var storeNameTxt = row.findViewById<TextView>(R.id.storeNameTxt)
+
+        storeNameTxt.text = data.name
+        Glide.with(mContext).load(data.logoUrl).into(storeLogoImg)
 
         return row
     }
